@@ -1,0 +1,19 @@
+import { ReactNode } from "react";
+import { Sidebar } from "./Sidebar";
+
+interface DashboardLayoutProps {
+  children: ReactNode;
+}
+
+export function DashboardLayout({ children }: DashboardLayoutProps) {
+  return (
+    <div className="min-h-screen gradient-hero">
+      <Sidebar />
+      <main className="pl-64">
+        <div className="p-6 lg:p-8">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
