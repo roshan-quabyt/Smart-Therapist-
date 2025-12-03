@@ -7,7 +7,10 @@ import {
   Volume2, 
   Globe,
   Shield,
-  Accessibility
+  Accessibility,
+  Sun,
+  Moon,
+  Monitor
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -15,8 +18,10 @@ import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { useTheme } from "@/hooks/useTheme";
 
 const Settings = () => {
+  const { theme, setTheme } = useTheme();
   const [notifications, setNotifications] = useState(true);
   const [soundEffects, setSoundEffects] = useState(true);
   const [highContrast, setHighContrast] = useState(false);
@@ -73,11 +78,60 @@ const Settings = () => {
           </div>
         </motion.div>
 
-        {/* Notifications */}
+        {/* Appearance */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
+          className="rounded-2xl bg-card p-6 shadow-card"
+        >
+          <div className="mb-4 flex items-center gap-3">
+            <Eye className="h-5 w-5 text-primary" />
+            <h2 className="font-display text-lg font-bold text-foreground">
+              Appearance
+            </h2>
+          </div>
+          <div className="space-y-4">
+            <div>
+              <Label className="mb-3 block text-foreground">Theme</Label>
+              <div className="flex gap-2">
+                <Button
+                  variant={theme === "light" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTheme("light")}
+                  className="gap-2"
+                >
+                  <Sun className="h-4 w-4" />
+                  Light
+                </Button>
+                <Button
+                  variant={theme === "dark" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTheme("dark")}
+                  className="gap-2"
+                >
+                  <Moon className="h-4 w-4" />
+                  Dark
+                </Button>
+                <Button
+                  variant={theme === "system" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTheme("system")}
+                  className="gap-2"
+                >
+                  <Monitor className="h-4 w-4" />
+                  System
+                </Button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Notifications */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="rounded-2xl bg-card p-6 shadow-card"
         >
           <div className="mb-4 flex items-center gap-3">
