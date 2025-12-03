@@ -7,12 +7,15 @@ import {
   BarChart3, 
   Settings,
   Heart,
-  Mic
+  Mic,
+  MessageSquare
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/" },
+  { icon: MessageSquare, label: "Practice", path: "/practice" },
   { icon: Gamepad2, label: "Games", path: "/games" },
   { icon: Users, label: "Therapists", path: "/therapists" },
   { icon: BarChart3, label: "Progress", path: "/progress" },
@@ -73,7 +76,11 @@ export function Sidebar() {
         </nav>
 
         {/* Footer */}
-        <div className="border-t border-border p-4">
+        <div className="space-y-3 border-t border-border p-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-muted-foreground">Theme</span>
+            <ThemeToggle />
+          </div>
           <div className="flex items-center gap-2 rounded-xl bg-secondary p-3">
             <Heart className="h-4 w-4 text-accent" />
             <span className="text-xs text-muted-foreground">
