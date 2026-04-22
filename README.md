@@ -1,73 +1,89 @@
-# Welcome to your Lovable project
+<div align="center">
+  <h1>🧠 TheraSmart: AI-Powered Speech Therapy</h1>
+  <p>An interactive, AI-driven web application designed to make speech therapy accessible, engaging, and highly effective.</p>
+</div>
 
-## Project info
+---
 
-**URL**: https://lovable.dev/projects/f27353a2-4df0-4ebd-9e9b-99b8de42872d
+## 📖 About The Project
 
-## How can I edit this code?
+TheraSmart is a modern, full-stack React application built to assist users with speech therapy through interactive games, real-time AI pronunciation analysis, and virtual AI therapist consultations. 
 
-There are several ways of editing your application.
+By leveraging in-browser Machine Learning (Wasm/WebGPU), TheraSmart completely eliminates the need for expensive backend video/audio processing—making real-time speech analysis lightning fast and completely private.
 
-**Use Lovable**
+### ✨ Key Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f27353a2-4df0-4ebd-9e9b-99b8de42872d) and start prompting.
+*   **🎙️ In-Browser Speech Analysis:** Uses Hugging Face's `transformers.js` to run Whisper models locally on the user's device. Transcribing and grading pronunciation accuracy instantly without sending audio to the cloud.
+*   **🎮 Interactive Practice Games:** Gamified learning modules to test enunciation and pacing.
+*   **🤖 AI Therapist Personas:** Chat with specialized AI therapists (designed with unique prompts) using a rich conversational UI.
+*   **🗓️ Session Booking:** A modern booking widget to schedule upcoming practice sessions with your preferred AI therapists.
+*   **📊 Smart Dashboard:** Track progress, daily streaks, average speech scores, and earn achievements based on your consistency.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🚀 Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+*   **Frontend Framework:** React 18 with Vite
+*   **Styling:** Tailwind CSS & `shadcn/ui` components
+*   **Animations:** Framer Motion
+*   **Local AI / ML:** `@huggingface/transformers` (Wasm & WebGPU fallbacks)
+*   **Database & Auth:** Supabase
+*   **State Management:** React Query (`@tanstack/react-query`)
+*   **Routing:** React Router v6
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## ⚙️ Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Prerequisites
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Ensure you have Node.js installed (v18 or higher is recommended) to run the development server.
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Installation
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/therasmart.git
+   cd therasmart/Therapist
+   ```
 
-**Edit a file directly in GitHub**
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. **Set up Environment Variables:**
+   Create a `.env` file in the root directory and add your Supabase credentials.
+   ```env
+   VITE_SUPABASE_URL=your-supabase-url
+   VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
 
-**Use GitHub Codespaces**
+4. **Run the Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+5. **Open in Browser:**
+   Navigate to `localhost:8080`.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🧠 Technical Highlights
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Robust AI Fallback System
+The application features a deeply optimized machine-learning pipeline. It initially attempts to load the Speech Recognition pipeline via **WebGPU** for maximum hardware acceleration. If the user's hardware does not support it, the app gracefully falls back to a **Wasm (WebAssembly)** quantified engine utilizing the CPU.
 
-## How can I deploy this project?
+### Performance Tuning
+* Built using specific Vite server headers (`Cross-Origin-Embedder-Policy: require-corp`) required by modern browsers to allocate high-performance memory chunks for the Wasm ML engine.
+* Hand-rolled Levenshtein distance matrix algorithms analyze transcription arrays against target text, providing strict `accuracy (%)` metrics and identifying exactly which words were missed or mispronounced.
 
-Simply open [Lovable](https://lovable.dev/projects/f27353a2-4df0-4ebd-9e9b-99b8de42872d) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 🤝 Contributing
 
-Yes, you can!
+Contributions are welcome! If you'd like to improve TheraSmart, please fork the repository and create a pull request with your proposed changes.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📄 License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+This project is open-source and available under the MIT License.

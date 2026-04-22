@@ -9,6 +9,7 @@ import {
   transcribeAudio,
   analyzePronunciation,
   isModelLoaded,
+  lastLoadingError,
 } from "@/utils/speechAnalysis";
 import { toast } from "@/hooks/use-toast";
 
@@ -52,7 +53,7 @@ export function SpeechRecorder({ targetText, onResult }: SpeechRecorderProps) {
           setIsModelLoading(false);
           toast({
             title: "Model Loading Error",
-            description: "Failed to load speech recognition. Please refresh and try again.",
+            description: lastLoadingError || "Failed to load speech recognition. Please check your internet and refresh.",
             variant: "destructive",
           });
         });
@@ -144,9 +145,9 @@ export function SpeechRecorder({ targetText, onResult }: SpeechRecorderProps) {
           >
             <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin" />
-              <span>Loading speech recognition model...</span>
+              <span>Downloading speech recognition model (approx. 150MB)... This may take 1-2 minutes.</span>
             </div>
-            <Progress value={modelProgress} className="h-2" />
+            <Progress value={modelProgress > 0 ? modelProgress : undefined} className="h-2" />
           </motion.div>
         )}
       </AnimatePresence>

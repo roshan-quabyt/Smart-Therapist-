@@ -38,7 +38,7 @@ export function StatsCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
       className={cn(
-        "relative overflow-hidden rounded-2xl p-6 shadow-card",
+        "relative overflow-hidden rounded-2xl p-4 sm:p-5 lg:p-6 shadow-card",
         variants[variant]
       )}
     >
@@ -86,9 +86,9 @@ export function StatsCard({
         </div>
       </div>
       
-      {/* Decorative element */}
+      {/* Decorative element - hidden on mobile for cleaner layout */}
       <div className={cn(
-        "absolute -right-4 -top-4 h-24 w-24 rounded-full opacity-10",
+        "absolute -right-4 -top-4 hidden sm:block h-24 w-24 rounded-full opacity-10",
         isPrimary ? "bg-white" : "bg-primary"
       )} />
     </motion.div>

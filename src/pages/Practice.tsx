@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
+import { supabase } from "@/utils/supabase";
+import { useAuth } from "@/contexts/AuthContext";
 
 const practiceWords = [
   "Hello, how are you today?",
@@ -19,13 +21,24 @@ const practiceWords = [
 const Practice = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scores, setScores] = useState<number[]>([]);
+  const { user } = useAuth();
 
-  const handleResult = (result: {
+  const handleResult = async (result: {
     transcribedText: string;
     accuracy: number;
     feedback: string;
   }) => {
     setScores((prev) => [...prev, result.accuracy]);
+
+    if (!user) return;
+
+    // Persist practice attempt to Supabase
+    await supabase.from("practice_sessions").insert({
+      user_id: user.id,
+      phrase: practiceWords[currentIndex],
+      accuracy: result.accuracy,
+      feedback: result.feedback,
+    });
   };
 
   const nextPhrase = () => {
@@ -42,14 +55,14 @@ const Practice = () => {
 
   return (
     <DashboardLayout>
-      <div className="mx-auto max-w-2xl space-y-8">
+      <div className="mx-auto max-w-2xl space-y-6 sm:space-y-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <h1 className="font-display text-3xl font-bold text-foreground">
+          <h1 className="font-display text-2xl font-bold sm:text-3xl text-foreground">
             Speech Practice
           </h1>
           <p className="mt-1 text-muted-foreground">
